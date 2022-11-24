@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="afd43c77-8a1d-4514-89fe-a75fe8206c5b" environment="${env}" />
+	<sub-flow name="mdp-e-commerce-sms-sys-apiSub_Flow" doc:id="12e21082-0722-4667-a61b-6bdd85d1f8d4" >
+		<json-logger:logger doc:name="Start Log" doc:id="ab1cb4d6-e123-4cbe-85da-87a68826a1bf" config-ref="JSON_Logger_Config" message="Sms Sytem api flow started"/>
+		<ee:transform doc:name="Transform Message" doc:id="4c900d13-b83e-43b5-abff-246851ba45c6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="End Log" doc:id="7288e00f-a636-4f6a-a843-6bb3c1fef82b" config-ref="JSON_Logger_Config" message="Sms Sytem api flow ended" tracePoint="END"/>
+	</sub-flow>
+</mule>
